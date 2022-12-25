@@ -14,7 +14,7 @@ npm init
 ## 2. Voltaでnodeとnpmバージョン設定
 ```commandline
 volta pin node@versions
-volta pin npm@8.19.2 
+volta pin npm@versions
 ```
 ## 3.gulpのインストール
 ```commandline
@@ -41,4 +41,12 @@ gulpfile.js内にコメント付きで記載
 ### 3.watchの起動
 ```commandline
 npx gulp watch
+```
+## 5.画像の自動圧縮
+### 1.モジュールのインストール
+```commandline
+npm i gulp-imagemin@7.1
+npm i imagemin-pngquant
+npm i imagemin-mozjpeg@9
+npm i gulp-changed
 ```
