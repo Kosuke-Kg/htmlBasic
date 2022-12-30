@@ -34,7 +34,8 @@ const path = {
 
 const watchFiles = () => {
     gulp.watch(path.scss.src, sass)
-    gulp.watch("./src/js/**", scriptTask())
+    gulp.watch("./src/js/**", scriptTask)
+    gulp.watch("./src/js/**", scriptMinTask)
     gulp.watch("./src/img/**", imageTask)
 }
 
@@ -143,14 +144,26 @@ const  scriptTask = () => {
                     path.js.dir, { sourcemaps: "./" }
                 )
             )
+    )
+}
+
+const scriptMinTask = () => {
+    return (
+        gulp.src("src/js/**", { sourcemaps: true })
             .pipe(
-                uglify({
-                    output: { comments: /^!/ }
+                plumber({ errorHandler: notify.onError("Error: <%= error.message %>") })
+            )
+            .pipe(
+                babel({
+                    presets: ["@babel/env"]
                 })
             )
             .pipe(
+                uglify({ output: { comments: /^!/ } })
+            )
+            .pipe(
                 rename({
-                  suffix: ".min"
+                    suffix: ".min"
                 })
             )
             .pipe(
@@ -163,5 +176,6 @@ const  scriptTask = () => {
 
 exports.sass = sass
 exports.scriptTask = scriptTask
+exports.scriptMinTask = scriptMinTask
 exports.imageTask = imageTask
 exports.watch = watchFiles
