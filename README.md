@@ -50,3 +50,21 @@ npm i imagemin-pngquant
 npm i imagemin-mozjpeg@9
 npm i gulp-changed
 ```
+
+## 6.Javascriptのトランスコンパイラ
+```commandline
+npm i gulp-babel 
+npm i @babel/core
+npm i @babel/preset-env
+npm i gulp-uglify
+```
+## 7.ESLintの導入
+## 8.Prettierの導入
+
+参考
+DartSass
+https://webstudioleaf.com/blog/gulp/gulp-dart-sass2/
+https://parashuto.com/rriver/development/media-queries-workflow-using-sass-and-gulp
+画像圧縮
+https://dezanari.com/gulp-imagemin/
+https://www.asobou.co.jp/blog/web/gulp-imagemin

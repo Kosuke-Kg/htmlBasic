@@ -11,10 +11,15 @@ const changed = require('gulp-changed')
 const imagemin = require('gulp-imagemin')
 const mozJpeg = require('imagemin-mozjpeg')
 const pngquant = require('imagemin-pngquant')
+const babel = require("gulp-babel")
+const uglify = require("gulp-uglify")
 
 const path = {
     css: {
         dir: "./release/src/css",
+    },
+    js: {
+        dir: "./release/src/js",
     },
     scss: {
         src: "./src/sass/**/*.scss",
@@ -23,12 +28,13 @@ const path = {
     },
     img: {
         release: "./release/src/img",
-        src: "./src/img"
+        src: "./src/img**"
     }
 }
 
 const watchFiles = () => {
     gulp.watch(path.scss.src, sass)
+    gulp.watch("./src/js/**", scriptTask())
     gulp.watch("./src/img/**", imageTask)
 }
 
@@ -106,7 +112,7 @@ const imageTask = () => {
                         speed: 1
                     }),
                     mozJpeg({
-                        quality: 0.75
+                        quality: 60
                     }),
                     imagemin.svgo(),
                     imagemin.optipng(),
@@ -121,6 +127,41 @@ const imageTask = () => {
     )
 }
 
+const  scriptTask = () => {
+    return (
+        gulp.src("src/js/**", { sourcemaps: true })
+            .pipe(
+                plumber({ errorHandler: notify.onError("Error: <%= error.message %>") })
+            )
+            .pipe(
+                babel({
+                    presets: ["@babel/env"]
+                })
+            )
+            .pipe(
+                gulp.dest(
+                    path.js.dir, { sourcemaps: "./" }
+                )
+            )
+            .pipe(
+                uglify({
+                    output: { comments: /^!/ }
+                })
+            )
+            .pipe(
+                rename({
+                  suffix: ".min"
+                })
+            )
+            .pipe(
+                gulp.dest(
+                    path.js.dir, { sourcemaps: "./" }
+                )
+            )
+    )
+}
+
 exports.sass = sass
+exports.scriptTask = scriptTask
 exports.imageTask = imageTask
 exports.watch = watchFiles
