@@ -38,5 +38,10 @@
     "ie >= 11",
     "Android >= 4",
     "ios_saf >= 8"
-  ]
+  ],
+  "devDependencies": {
+    "eslint": "^8.30.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  }
 }

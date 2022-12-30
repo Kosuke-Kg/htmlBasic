@@ -59,12 +59,20 @@ npm i @babel/preset-env
 npm i gulp-uglify
 ```
 ## 7.ESLintの導入
+```commandline
+npm i eslint
+./node_modules/.bin/eslint --init
+```
 ## 8.Prettierの導入
 
-参考
-DartSass
+#### 参考
+DartSass<br>
 https://webstudioleaf.com/blog/gulp/gulp-dart-sass2/
 https://parashuto.com/rriver/development/media-queries-workflow-using-sass-and-gulp
-画像圧縮
+
+画像圧縮<br>
 https://dezanari.com/gulp-imagemin/
 https://www.asobou.co.jp/blog/web/gulp-imagemin
+
+Js<br>
+https://yumegori.com/gulp4-setting20191025#chapter-11
