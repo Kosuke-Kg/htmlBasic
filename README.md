@@ -64,7 +64,10 @@ npm i eslint
 ./node_modules/.bin/eslint --init
 ```
 ## 8.Prettierの導入
-
+```commandline
+npm i prettier 
+npm i eslint-config-prettier
+```
 #### 参考
 DartSass<br>
 https://webstudioleaf.com/blog/gulp/gulp-dart-sass2/

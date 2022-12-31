@@ -1,1 +1,2 @@
-release/src/js/*
+release/src/*
+src/sass/*
