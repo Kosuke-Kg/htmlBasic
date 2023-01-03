@@ -49,6 +49,7 @@ npm i gulp-imagemin@7.1
 npm i imagemin-pngquant
 npm i imagemin-mozjpeg@9
 npm i gulp-changed
+npm i gulp-webp
 ```
 
 ## 6.Javascriptのトランスコンパイラ

@@ -10,6 +10,7 @@ const rename = require("gulp-rename")
 const changed = require("gulp-changed")
 const imagemin = require("gulp-imagemin")
 const mozJpeg = require("imagemin-mozjpeg")
+const webp = require("gulp-webp")
 const pngquant = require("imagemin-pngquant")
 const babel = require("gulp-babel")
 const uglify = require("gulp-uglify")
@@ -37,6 +38,7 @@ const watchFiles = () => {
   gulp.watch("./src/js/**", scriptTask)
   gulp.watch("./src/js/**", scriptMinTask)
   gulp.watch("./src/img/**", imageTask)
+  gulp.watch("./src/img/**/*.{jpg,jpeg,png}", webpTask)
 }
 
 const sass = () =>
@@ -104,6 +106,18 @@ const imageTask = () =>
     )
     .pipe(gulp.dest(path.img.release))
 
+const webpTask = () =>
+  gulp
+    .src("./src/img/**/*.{jpg,jpeg,png}")
+    .pipe(rename((name) => name.basename + name.extname))
+    .pipe(
+      webp({
+        quality: 70,
+        method: 6,
+      })
+    )
+    .pipe(gulp.dest(path.img.release))
+
 const scriptTask = () =>
   gulp
     .src("src/js/**", { sourcemaps: true })
@@ -140,4 +154,5 @@ exports.sass = sass
 exports.scriptTask = scriptTask
 exports.scriptMinTask = scriptMinTask
 exports.imageTask = imageTask
+exports.webpTask = webpTask
 exports.watch = watchFiles
